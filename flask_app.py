@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -28,10 +28,27 @@ class Party(db.Model):
         }
 
  # create route for React to call
-@app.route('/homepage', methods=['GET'])
+@app.route('/api/parties', methods=['GET'])
 def get_parties():
     all_parties = Party.query.all()
     return jsonify([party.to_dict() for party in all_parties])
+
+@app.route('/api/parties/search', methods=['GET'])
+def search_parties():
+    # 1. Get the keyword from the URL (e.g., /api/parties/search?q=olaf)
+    query = request.args.get('q', '')
+
+    if not query:
+        return jsonify([]) # Return empty list if no search term
+
+    # .ilike makes it case-insensitive (olaf vs Olaf doesn't matter)
+    search_results = Party.query.filter(
+        (Party.school.ilike(f'%{query}%')) | 
+        (Party.house.ilike(f'%{query}%')) | 
+        (Party.address.ilike(f'%{query}%'))
+    ).all()
+
+    return jsonify([party.to_dict() for party in search_results])
 
 def main():
     print(get_parties())
