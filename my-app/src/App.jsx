@@ -28,14 +28,14 @@ function App() {
         <nav>
           <ul>
             <li className="active">
-              <a href="/">🏠 Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <form onSubmit={handleSearch} className="search-form">
                 {
                   <input
                     type="text"
-                    placeholder="🔎 Search Event..."
+                    placeholder=" Search Event..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="search-input"
@@ -53,7 +53,7 @@ function App() {
         </nav>
       </section>
 
-      {/* Hero / Banner */}
+      {/* Prime Header / Banner */}
       <section className="hero">
         <div className="hero-content">
           <p className="hero-tagline">Carleton & St. Olaf</p>
@@ -72,7 +72,7 @@ function App() {
             <div key={party.id} className="party-card">
               <div className="card-school-tag">{party.school}</div>
               <h4 className="card-house">{party.house}</h4>
-              <p className="card-address">📍 {party.address}</p>
+              <p className="card-address"> {party.address}</p>
               <p className="card-date">🗓 {party.date}</p>
             </div>
           ))}
