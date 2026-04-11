@@ -1,12 +1,33 @@
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/parties_db'
+def _ensure_supabase_sslmode(db_url):
+    """Supabase Postgres connections should explicitly require SSL."""
+    if not db_url:
+        return db_url
+
+    parsed = urlparse(db_url)
+    host = parsed.hostname or ""
+    if not host.endswith(".supabase.co"):
+        return db_url
+
+    query = dict(parse_qsl(parsed.query, keep_blank_values=True))
+    if "sslmode" not in query:
+        query["sslmode"] = "require"
+        return urlunparse(parsed._replace(query=urlencode(query)))
+
+    return db_url
+
+app.config['SQLALCHEMY_DATABASE_URI'] = _ensure_supabase_sslmode(os.getenv("DATABASE_URL"))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
