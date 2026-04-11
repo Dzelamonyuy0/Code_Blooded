@@ -73,7 +73,7 @@ function App() {
               <div className="card-school-tag">{party.school}</div>
               <h4 className="card-house">{party.house}</h4>
               <p className="card-address"> {party.address}</p>
-              <p className="card-date">🗓 {party.date}</p>
+              <p className="card-date">{party.date}</p>
             </div>
           ))}
         </div>
