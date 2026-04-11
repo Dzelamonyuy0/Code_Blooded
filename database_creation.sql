@@ -1,6 +1,6 @@
 -- psql postgres
 
-CREATE DATABASE party_db;
+CREATE DATABASE parties_db;
 
 CREATE TABLE parties (
     id SERIAL PRIMARY KEY,
