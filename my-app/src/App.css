@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+<<<<<<< HEAD
 
 /* -------Navigation bars------- */
 
@@ -74,3 +75,5 @@ nav li a:hover {
 	background-color: rgb(162, 206, 97);
     border-radius: 5px;
 }
+=======
+>>>>>>> 52b350fc4faeb2dbe60cefd8dda2b2f7e5324523
