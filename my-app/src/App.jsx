@@ -53,27 +53,27 @@ function App() {
         </nav>
       </section>
 
-      {/* Secondary Nav / Title */}
-      <nav>
-        <h1>Carls Party Site</h1>
-      </nav>
-
       {/* Hero / Banner */}
       <section className="hero">
-        <h2>Welcome</h2>
-        <p>This is my one-page website.</p>
-        <button>Get Started</button>
+        <div className="hero-content">
+          <p className="hero-tagline">Carleton & St. Olaf</p>
+          <h1 className="hero-title">Carls Party Site</h1>
+          <p className="hero-subtitle">Your guide to the best parties on the hill. Find events, explore venues, and never miss a night out.</p>
+          <a href="#parties" className="hero-btn">Browse Parties</a>
+        </div>
       </section>
 
-      {/* Additional Content Section (placeholder to keep structure expandable) */}
-      <section className="content">
-        <h3>Upcoming Parties</h3>
+      {/* Party Cards */}
+      <section className="content" id="parties">
+        <h2 className="section-title">Upcoming Parties</h2>
+        <p className="section-sub">{parties.length} events found</p>
         <div className="party-list">
           {parties.map((party) => (
             <div key={party.id} className="party-card">
-              <h4>{party.house}</h4>
-              <p>{party.school} | {party.address}</p>
-              <p>Date: {party.date}</p>
+              <div className="card-school-tag">{party.school}</div>
+              <h4 className="card-house">{party.house}</h4>
+              <p className="card-address">📍 {party.address}</p>
+              <p className="card-date">🗓 {party.date}</p>
             </div>
           ))}
         </div>
